@@ -1,20 +1,15 @@
+// src/components/CryptoCard.js
 import React from 'react';
-import '../styles/CryptoCard.css';
 
-const CryptoCard = ({ coin }) => {
-  if (!coin) {
-    return null; // Return null if coin data is not available
-  }
-
+function CryptoCard({ coin }) {
   return (
-    <div className="crypto-card">
-      <img src={coin.image || ''} alt={coin.name || 'Crypto Image'} className="crypto-image" />
-      <h2>{coin.name || 'Unknown Coin'}</h2>
-      <p>Symbol: {coin.symbol?.toUpperCase() || 'N/A'}</p>
-      <p>Price: ${coin.current_price?.toLocaleString() || 'N/A'}</p>
-      <p>Market Cap: ${coin.market_cap?.toLocaleString() || 'N/A'}</p>
+    <div className="bg-white p-4 rounded-lg shadow-lg">
+      <h3 className="text-lg font-semibold text-center">{coin.name}</h3>
+      <p className="text-center text-gray-500">{coin.symbol}</p>
+      <p className="text-center font-bold text-xl">${coin.current_price}</p>
+      <img src={coin.image} alt={coin.name} className="mx-auto mt-4 w-16 h-16 object-contain" />
     </div>
   );
-};
+}
 
 export default CryptoCard;
