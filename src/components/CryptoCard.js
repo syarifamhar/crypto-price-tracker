@@ -1,5 +1,6 @@
-// src/components/CryptoCard.js
+// CryptoCard.js
 import React from 'react';
+import '../styles/CryptoCard.css';
 
 function CryptoCard({ coin }) {
   return (
