@@ -1,70 +1,110 @@
-// App.js
 import React, { useState, useEffect } from 'react';
-import { getCryptoPrices } from './services/CryptoApi';
-import CryptoCard from './components/CryptoCard';
+import axios from 'axios';
 import './styles/App.css';
 
-function App() {
-  const [cryptoData, setCryptoData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(20);
-  const [totalPages, setTotalPages] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
+const App = () => {
+  const [coins, setCoins] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [coinsPerPage, setCoinsPerPage] = useState(20);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    fetchData();
-  }, [page, itemsPerPage, searchTerm]);
+    const fetchCoins = async () => {
+      try {
+        const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
+          params: {
+            vs_currency: 'usd',
+            order: 'market_cap_desc',
+            per_page: 250,
+            page: 1,
+            sparkline: false,
+          },
+        });
+        setCoins(response.data);
+      } catch (error) {
+        console.error('Error fetching data', error);
+      }
+    };
+    fetchCoins();
+  }, []);
 
-  const fetchData = async () => {
-    const data = await getCryptoPrices();
-    const filteredData = searchTerm
-      ? data.filter((coin) => coin.name.toLowerCase().includes(searchTerm.toLowerCase()))
-      : data;
-    setCryptoData(filteredData.slice((page - 1) * itemsPerPage, page * itemsPerPage));
-    setTotalPages(Math.ceil(filteredData.length / itemsPerPage));
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1);  // Reset to the first page on new search
   };
 
-  const handleNextPage = () => {
-    if (page < totalPages) setPage(page + 1);
+  const handleCoinsPerPageChange = (number) => {
+    setCoinsPerPage(number);
+    setCurrentPage(1);  // Reset to the first page
   };
 
-  const handlePrevPage = () => {
-    if (page > 1) setPage(page - 1);
-  };
+  const filteredCoins = coins.filter(coin =>
+    coin.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const handleItemsPerPageChange = (value) => {
-    setItemsPerPage(value);
-    setPage(1);
+  const totalPages = Math.ceil(filteredCoins.length / coinsPerPage);
+
+  const indexOfLastCoin = currentPage * coinsPerPage;
+  const indexOfFirstCoin = indexOfLastCoin - coinsPerPage;
+  const currentCoins = filteredCoins.slice(indexOfFirstCoin, indexOfLastCoin);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
-    <div className="App">
-      <h1>Crypto Price Tracker</h1>
+    <div className="app">
+      <h1 className="title">Crypto Price Tracker</h1>
       <input
         type="text"
         placeholder="Search..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="search-input"
+        onChange={handleSearchChange}
+        className="search-bar"
       />
-      <div className="crypto-container">
-        {cryptoData.map((coin) => (
-          <CryptoCard key={coin.id} coin={coin} />
+      <div className="coins-container">
+        {currentCoins.map(coin => (
+          <div key={coin.id} className="coin-card">
+            <img src={coin.image} alt={coin.name} className="coin-image" />
+            <h2 className="coin-name">{coin.name}</h2>
+            <p className="coin-symbol">{coin.symbol}</p>
+            <p className="coin-price">${coin.current_price}</p>
+          </div>
         ))}
       </div>
-      <div className="pagination-container">
-        <button onClick={handlePrevPage} disabled={page === 1}>← Prev</button>
-        <span>{page}</span>
-        <button onClick={handleNextPage} disabled={page === totalPages}>Next →</button>
+      <div className="pagination">
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="pagination-button"
+        >
+          &lt; Prev
+        </button>
+        {[...Array(totalPages)].map((_, i) => (
+          <button
+            key={i}
+            onClick={() => paginate(i + 1)}
+            className={`pagination-number ${currentPage === i + 1 ? 'active' : ''}`}
+          >
+            {i + 1}
+          </button>
+        ))}
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="pagination-button"
+        >
+          Next &gt;
+        </button>
       </div>
-      <div className="items-per-page">
-        <button onClick={() => handleItemsPerPageChange(20)}>20 coins</button>
-        <button onClick={() => handleItemsPerPageChange(50)}>50 coins</button>
-        <button onClick={() => handleItemsPerPageChange(100)}>100 coins</button>
-        <button onClick={() => handleItemsPerPageChange(totalPages * itemsPerPage)}>Show All</button>
+      <div className="coins-per-page">
+        <button onClick={() => handleCoinsPerPageChange(20)}>20 coins</button>
+        <button onClick={() => handleCoinsPerPageChange(50)}>50 coins</button>
+        <button onClick={() => handleCoinsPerPageChange(100)}>100 coins</button>
+        <button onClick={() => handleCoinsPerPageChange(filteredCoins.length)}>Show All</button>
       </div>
     </div>
   );
-}
+};
 
 export default App;
