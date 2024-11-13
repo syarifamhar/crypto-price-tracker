@@ -1,38 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { getCryptoPrices } from '../services/CryptoApi';
+import React from 'react';
 
-function CoinDetail() {
-  const { id } = useParams();
-  const [coin, setCoin] = useState(null);
-  const [loading, setLoading] = useState(true);
+const CoinDetails = ({ coin, onBack }) => (
+  <div className="bg-white shadow rounded p-4">
+    <button onClick={onBack} className="text-blue-500 underline mb-4">
+      &larr; Back to List
+    </button>
+    <h2 className="text-2xl font-bold mb-2">{coin.name} Details</h2>
+    <p>Symbol: {coin.symbol.toUpperCase()}</p>
+    <p>Current Price: ${coin.current_price.toLocaleString()}</p>
+    <p>Market Cap: ${coin.market_cap.toLocaleString()}</p>
+    <p>Total Volume: ${coin.total_volume.toLocaleString()}</p>
+    {/* Add additional details if needed */}
+  </div>
+);
 
-  useEffect(() => {
-    const fetchCoin = async () => {
-      setLoading(true);
-      const data = await getCryptoPrices();
-      const selectedCoin = data.find((coin) => coin.id === id);
-      setCoin(selectedCoin);
-      setLoading(false);
-    };
-    fetchCoin();
-  }, [id]);
-
-  if (loading) return <p>Loading...</p>;
-
-  return (
-    <div className="coin-detail">
-      <Link to="/" className="back-button">Back</Link>
-      <h2>{coin.name}</h2>
-      <img src={coin.image} alt={coin.name} />
-      <p>Symbol: {coin.symbol}</p>
-      <p>Current Price: ${coin.current_price}</p>
-      <p>Market Cap: ${coin.market_cap}</p>
-      <p>24h Volume: ${coin.total_volume}</p>
-      <p>High 24h: ${coin.high_24h}</p>
-      <p>Low 24h: ${coin.low_24h}</p>
-    </div>
-  );
-}
-
-export default CoinDetail;
+export default CoinDetails;

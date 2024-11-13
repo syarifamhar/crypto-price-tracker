@@ -1,12 +1,6 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  margin: 0;
-  padding: 0;
-}
-
-.App {
+.app {
   text-align: center;
+  font-family: Arial, sans-serif;
   padding: 20px;
 }
 
@@ -14,87 +8,27 @@ h1 {
   color: #333;
 }
 
-.search-input {
-  width: 300px;
+input {
+  margin: 20px 0;
   padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
   font-size: 16px;
+  width: 300px;
 }
 
-.crypto-grid {
+.crypto-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+}
+
+.coin-detail {
+  text-align: left;
+  margin: auto;
+  width: 50%;
+}
+
+.back-button {
   margin-bottom: 20px;
-}
-
-.pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.pagination button {
-  padding: 8px 12px;
-  margin: 0 2px;
-  border: none;
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 5px;
+  padding: 10px;
   cursor: pointer;
-  font-size: 14px;
-}
-
-.pagination button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.pagination .active {
-  background-color: #0056b3;
-}
-
-.pagination .pagination-filter {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  background-color: #f0f0f0;
-  cursor: pointer;
-}
-
-.CryptoCard {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  background-color: #fff;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.CryptoCard img {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 10px;
-}
-
-.CryptoCard h2 {
-  font-size: 18px;
-  color: #333;
-  margin: 0;
-}
-
-.CryptoCard p {
-  font-size: 14px;
-  color: #777;
-  margin: 5px 0;
-}
-
-.CryptoCard .price {
-  font-size: 16px;
-  color: #007bff;
-  font-weight: bold;
 }

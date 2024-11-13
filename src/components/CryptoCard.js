@@ -1,15 +1,15 @@
-import React from "react";
-import "../styles/CryptoCard.css";
+import React from 'react';
+import '../styles/CryptoCard.css';
 
-function CryptoCard({ coin, onClick }) {
+const CryptoCard = ({ coin, onClick }) => {
   return (
     <div className="crypto-card" onClick={onClick}>
-      <img src={coin.image} alt={coin.name} />
-      <h3>{coin.name}</h3>
-      <p>{coin.symbol}</p>
-      <p>${coin.current_price}</p>
+      <img src={coin.image} alt={`${coin.name} logo`} />
+      <h2>{coin.name} ({coin.symbol.toUpperCase()})</h2>
+      <p>Price: ${coin.current_price}</p>
+      <p>Market Cap: ${coin.market_cap.toLocaleString()}</p>
     </div>
   );
-}
+};
 
 export default CryptoCard;

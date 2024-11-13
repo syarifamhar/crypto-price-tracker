@@ -1,64 +1,20 @@
 .crypto-card {
-    background-color: #f8f9fa; /* Light background for readability */
-    border: 1px solid #e0e0e0; /* Soft border for definition */
-    border-radius: 8px;
+    border: 1px solid #ccc;
     padding: 20px;
-    margin: 10px;
-    max-width: 100%;
     text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: transform 0.2s ease-in-out;
-}
-
-.crypto-card:hover {
-    transform: translateY(-4px); /* Hover effect for interactivity */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.crypto-image {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 15px;
-    border-radius: 50%; /* Circle image for a clean look */
-}
-
-h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #333; /* Dark text for readability */
-    margin: 10px 0;
-}
-
-p {
-    font-size: 1rem;
-    color: #666;
-    margin: 5px 0;
-}
-
-.crypto-card p:first-of-type {
-    font-weight: 500;
-}
-
-.crypto-card p:last-of-type {
-    font-weight: 600;
-    color: #007bff; /* Highlighted color for market cap */
-}
-
-@media (max-width: 768px) {
-    .crypto-card {
-        max-width: 100%; /* Full width on smaller screens */
-    }
-
-    .crypto-image {
-        width: 40px;
-        height: 40px;
-    }
-
-    h2 {
-        font-size: 1.1rem;
-    }
-
-    p {
-        font-size: 0.9rem;
-    }
-}
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .crypto-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .crypto-card img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+  }
+  
