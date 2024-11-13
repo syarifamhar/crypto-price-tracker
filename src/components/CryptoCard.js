@@ -1,14 +1,13 @@
-// CryptoCard.js
-import React from 'react';
-import '../styles/CryptoCard.css';
+import React from "react";
+import "../styles/CryptoCard.css";
 
-function CryptoCard({ coin }) {
+function CryptoCard({ coin, onClick }) {
   return (
-    <div className="bg-white p-4 rounded-lg shadow-lg">
-      <h3 className="text-lg font-semibold text-center">{coin.name}</h3>
-      <p className="text-center text-gray-500">{coin.symbol}</p>
-      <p className="text-center font-bold text-xl">${coin.current_price}</p>
-      <img src={coin.image} alt={coin.name} className="mx-auto mt-4 w-16 h-16 object-contain" />
+    <div className="crypto-card" onClick={onClick}>
+      <img src={coin.image} alt={coin.name} />
+      <h3>{coin.name}</h3>
+      <p>{coin.symbol}</p>
+      <p>${coin.current_price}</p>
     </div>
   );
 }
