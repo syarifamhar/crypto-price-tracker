@@ -55,6 +55,7 @@ const App = () => {
       {selectedCoin ? (
         <div className="coin-detail">
           <button onClick={() => setSelectedCoin(null)} className="back-button">Back</button>
+          <img src={selectedCoin.image} alt={`${selectedCoin.name} logo`} />
           <h2>{selectedCoin.name} ({selectedCoin.symbol.toUpperCase()})</h2>
           <p>Current Price: ${selectedCoin.current_price}</p>
           <p>Market Cap: ${selectedCoin.market_cap.toLocaleString()}</p>

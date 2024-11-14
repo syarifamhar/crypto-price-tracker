@@ -5,6 +5,7 @@ const CoinDetails = ({ coin, onBack }) => (
     <button onClick={onBack} className="text-blue-500 underline mb-4">
       &larr; Back to List
     </button>
+    <img src={coin.image} alt={`${coin.name} logo`} />
     <h2 className="text-2xl font-bold mb-2">{coin.name} Details</h2>
     <p>Symbol: {coin.symbol.toUpperCase()}</p>
     <p>Current Price: ${coin.current_price.toLocaleString()}</p>
