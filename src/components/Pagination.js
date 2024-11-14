@@ -2,26 +2,46 @@ import React from 'react';
 import '../styles/Pagination.css';
 
 const Pagination = ({ coinsPerPage, totalCoins, paginate, currentPage }) => {
-  const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalCoins / coinsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
-  return (
-    <div className="pagination">
-      {pageNumbers.map(number => (
+    const pageNumbers = [];
+    const totalPages = Math.ceil(totalCoins / coinsPerPage);
+  
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+  
+    const handleNextPage = () => {
+      if (currentPage < totalPages) paginate(currentPage + 1);
+    };
+  
+    const handlePreviousPage = () => {
+      if (currentPage > 1) paginate(currentPage - 1);
+    };
+  
+    return (
+      <div className="pagination">
         <button
-          key={number}
-          onClick={() => paginate(number)}
-          className={number === currentPage ? 'active' : ''}
+          onClick={handlePreviousPage}
+          className={`pagination-arrow ${currentPage === 1 ? 'disabled' : ''}`}
         >
-          {number}
+          &lt;
         </button>
-      ))}
-      
-    </div>
-  );
-};
-
-export default Pagination;
+        {pageNumbers.map(number => (
+          <button
+            key={number}
+            onClick={() => paginate(number)}
+            className={`pagination-number ${number === currentPage ? 'active' : ''}`}
+          >
+            {number}
+          </button>
+        ))}
+        <button
+          onClick={handleNextPage}
+          className={`pagination-arrow ${currentPage === totalPages ? 'disabled' : ''}`}
+        >
+          &gt;
+        </button>
+      </div>
+    );
+  };
+  
+  export default Pagination;

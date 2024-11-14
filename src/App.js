@@ -51,7 +51,6 @@ const App = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <Filter setCoinsPerPage={setCoinsPerPage} />
 
       {selectedCoin ? (
         <div className="coin-detail">
@@ -68,7 +67,9 @@ const App = () => {
           ))}
         </div>
       )}
+      <div class="pagination-container">
       {!selectedCoin && (
+        
         <Pagination
           coinsPerPage={coinsPerPage}
           totalCoins={filteredCoins.length}
@@ -76,6 +77,8 @@ const App = () => {
           currentPage={currentPage}
         />
       )}
+      <Filter setCoinsPerPage={setCoinsPerPage} />
+      </div>
     </div>
   );
 };
