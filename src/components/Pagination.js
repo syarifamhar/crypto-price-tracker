@@ -1,47 +1,37 @@
-import React from 'react';
-import '../styles/Pagination.css';
+import React from "react";
 
 const Pagination = ({ coinsPerPage, totalCoins, paginate, currentPage }) => {
-    const pageNumbers = [];
-    const totalPages = Math.ceil(totalCoins / coinsPerPage);
-  
-    for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(i);
-    }
-  
-    const handleNextPage = () => {
-      if (currentPage < totalPages) paginate(currentPage + 1);
-    };
-  
-    const handlePreviousPage = () => {
-      if (currentPage > 1) paginate(currentPage - 1);
-    };
-  
-    return (
-      <div className="pagination">
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(totalCoins / coinsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  return (
+    <div className="pagination">
+      <button
+        onClick={() => paginate(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        &lt;
+      </button>
+      {pageNumbers.map((number) => (
         <button
-          onClick={handlePreviousPage}
-          className={`pagination-arrow ${currentPage === 1 ? 'disabled' : ''}`}
+          key={number}
+          onClick={() => paginate(number)}
+          className={currentPage === number ? "active" : ""}
         >
-          &lt;
+          {number}
         </button>
-        {pageNumbers.map(number => (
-          <button
-            key={number}
-            onClick={() => paginate(number)}
-            className={`pagination-number ${number === currentPage ? 'active' : ''}`}
-          >
-            {number}
-          </button>
-        ))}
-        <button
-          onClick={handleNextPage}
-          className={`pagination-arrow ${currentPage === totalPages ? 'disabled' : ''}`}
-        >
-          &gt;
-        </button>
-      </div>
-    );
-  };
-  
-  export default Pagination;
+      ))}
+      <button
+        onClick={() => paginate(currentPage + 1)}
+        disabled={currentPage === pageNumbers.length}
+      >
+        &gt;
+      </button>
+    </div>
+  );
+};
+
+export default Pagination;

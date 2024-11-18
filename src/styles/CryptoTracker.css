@@ -1,0 +1,85 @@
+.crypto-tracker-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .crypto-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .crypto-table th,
+  .crypto-table td {
+    text-align: left;
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+  
+  .crypto-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-controls {
+    display: flex;
+    align-items: center;
+  }
+  
+  .pagination-button {
+    padding: 8px 16px;
+    margin: 0 4px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .pagination-button:disabled {
+    background: #ddd;
+    cursor: not-allowed;
+  }
+  
+  .pagination-info {
+    margin: 0 10px;
+  }
+  
+  .filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .filter-button {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+  }
+  
+  .filter-button.active-filter {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+
+  .coin-logo-table {
+    height: 50px;
+    width: 50px;
+  }
