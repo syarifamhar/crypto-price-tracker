@@ -57,11 +57,19 @@ const CryptoTracker = () => {
         </thead>
         <tbody>
           {coins.map((coin, index) => (
-            <tr key={coin.id}>
-              <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
-              <td><img src={coin.image} alt={`${coin.name} logo`} class="coin-logo-table" /> {coin.name} {coin.symbol}</td>
-              <td>${coin.current_price}</td>
-              <td>${coin.market_cap}</td>
+            <tr key={coin.id} class="hover:tw-bg-gray-50 tw-bg-white dark:tw-bg-moon-900 hover:dark:tw-bg-moon-800 tw-text-sm">
+              <td class="tw-sticky 2lg:tw-static tw-left-[24px] tw-px-1 tw-py-2.5 2lg:tw-p-2.5 tw-bg-inherit tw-text-gray-900 dark:tw-text-moon-50">{(currentPage - 1) * itemsPerPage + index + 1}</td>
+              <td class="tw-sticky 2lg:tw-static tw-left-[51px] md:tw-left-[72px] tw-px-1 tw-py-2.5 2lg:tw-p-2.5 tw-bg-inherit tw-text-gray-900 dark:tw-text-moon-50">
+                <a class="tw-flex tw-items-center tw-w-full">
+                  <img src={coin.image} alt={`${coin.name} logo`} class="coin-logo-table" /> 
+                  <div class="tw-flex tw-flex-col 2lg:tw-flex-row tw-items-start 2lg:tw-items-center">
+                    {coin.name} {coin.symbol}
+                  </div>
+                  
+                </a>
+                </td>
+              <td class="tw-sticky 2lg:tw-static tw-left-[24px] tw-px-1 tw-py-2.5 2lg:tw-p-2.5 tw-bg-inherit tw-text-gray-900 dark:tw-text-moon-50">${coin.current_price}</td>
+              <td class="tw-sticky 2lg:tw-static tw-left-[24px] tw-px-1 tw-py-2.5 2lg:tw-p-2.5 tw-bg-inherit tw-text-gray-900 dark:tw-text-moon-50">${coin.market_cap}</td>
             </tr>
           ))}
         </tbody>
